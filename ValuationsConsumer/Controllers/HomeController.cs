@@ -19,18 +19,18 @@ namespace ValuationsConsumer.Controllers
             return View(ad);
         }
 
-        public async Task<List<AccountDetails>> GetClientValuationDetails()
+        public async Task<AccountDetails> GetClientValuationDetails()
         {
-            var model = new List<AccountDetails>();
+            var model = new AccountDetails();
 
             using (new HttpClient())
             {
-                var request = WebRequest.CreateHttp("http://reykervaluationsdata.azurewebsites.net/api/plans/1878");
+                var request = WebRequest.CreateHttp("http://reykervaluationsdata.azurewebsites.net/api/plans/6733");
                 request.ContentType = "text/json";
                 request.Method = "GET";
 
                 //Need to change username to provided username
-                const string authHeader = "Reyker ValuationsConsumer";
+                const string authHeader = "Reyker USERNAME";
                 request.Headers.Add("Authorization", authHeader);
 
                 using (var response = request.GetResponse() as HttpWebResponse)
@@ -40,7 +40,7 @@ namespace ValuationsConsumer.Controllers
                         using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                         {
                             var objText = reader.ReadToEnd();
-                            model = await objText.AES_Decrypt<List<AccountDetails>>();
+                            model = await objText.AES_Decrypt<AccountDetails>();
                         }
                     }
                 }

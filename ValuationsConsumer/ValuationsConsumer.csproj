@@ -125,15 +125,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountDetails.cs" />
-    <Compile Include="Models\AccountPlanDetails.cs" />
-    <Compile Include="Models\BalanceBoughtForward.cs" />
-    <Compile Include="Models\BalanceCarriedForward.cs" />
-    <Compile Include="Models\PlanCashTransaction.cs" />
-    <Compile Include="Models\PlanFee.cs" />
-    <Compile Include="Models\PlanInvestmentTransaction.cs" />
-    <Compile Include="Models\PlanNetInvestmentIncome.cs" />
-    <Compile Include="Models\PlanPortfolioValuation.cs" />
-    <Compile Include="Models\PlanTypeDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Encryption.cs" />
   </ItemGroup>
