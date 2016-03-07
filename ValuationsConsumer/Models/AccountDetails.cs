@@ -45,6 +45,7 @@ namespace ValuationsConsumer.Models
         public double TransactionId { get; set; }
         public DateTime TransactionDate { get; set; }
         public double Value { get; set; }
+        public string Type { get; set; }
     }
 
     public class PlanInvestmentTransaction
