@@ -25,7 +25,7 @@ namespace ValuationsConsumer.Controllers
 
             using (new HttpClient())
             {
-                var request = WebRequest.CreateHttp("http://reykervaluationsdata.azurewebsites.net/api/plans/6733");
+                var request = WebRequest.CreateHttp("http://reykervaluationsexternaltest.azurewebsites.net/api/plans/6733");
                 request.ContentType = "text/json";
                 request.Method = "GET";
 
