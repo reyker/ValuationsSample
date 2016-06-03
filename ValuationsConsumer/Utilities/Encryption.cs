@@ -7,13 +7,14 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace ValuationsConsumer.Utilities
 {
     public class Encryption
     {
         private readonly string aesKey = "lr1Jwa9IO6l6iF5EccZ8S5fAkFMwkkkfHKyzRLntrJQ=";
-        private readonly byte[] salt = System.Text.Encoding.UTF8.GetBytes("ReykerExample");
+        private readonly byte[] salt = Encoding.UTF8.GetBytes("ReykerExample");
 
         internal async Task<string> AES_Encrypt(object objectToBeEncrypted)
         {
@@ -106,11 +107,9 @@ namespace ValuationsConsumer.Utilities
                         }
                     }
                 }
-
-
             }
-            return JsonConvert.DeserializeObject<T>(retJson);
 
+            return JsonConvert.DeserializeObject<T>(retJson);
         }
 
         public class EncryptionVM

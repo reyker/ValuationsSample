@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -25,7 +23,7 @@ namespace ValuationsConsumer.Controllers
 
             using (new HttpClient())
             {
-                var request = WebRequest.CreateHttp("http://reykervaluationsexternaltest.azurewebsites.net/api/plans/6733");
+                var request = WebRequest.CreateHttp("https://reykervaluationsexternaltest.azurewebsites.net/api/plans/3699");
                 request.ContentType = "text/json";
                 request.Method = "GET";
 

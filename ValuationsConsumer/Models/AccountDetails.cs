@@ -23,6 +23,7 @@ namespace ValuationsConsumer.Models
         public string PlanName { get; set; }
         public string Provider { get; set; }
         public int ProviderId { get; set; }
+        public double? CurrentYearIsaSubscription { get; set; }
         public List<PlanPortfolioValuation> PortfolioValuations { get; set; }
         public List<PlanNetInvestmentIncome> NetInvestmentIncomeDetails { get; set; }
         public List<PlanInvestmentTransaction> InvestmentTransactionDetails { get; set; }
@@ -37,6 +38,7 @@ namespace ValuationsConsumer.Models
         public double? BookCost { get; set; }
         public double? Price { get; set; }
         public DateTime? PriceDate { get; set; }
+        public string Isin { get; set; }
     }
 
     public class PlanNetInvestmentIncome
@@ -46,6 +48,7 @@ namespace ValuationsConsumer.Models
         public DateTime TransactionDate { get; set; }
         public double Value { get; set; }
         public string Type { get; set; }
+        public string Isin { get; set; }
     }
 
     public class PlanInvestmentTransaction
@@ -64,5 +67,6 @@ namespace ValuationsConsumer.Models
         public double TransactionId { get; set; }
         public string TransactionType { get; set; }
         public double Amount { get; set; }
+        public string Isin { get; set; }
     }
 }

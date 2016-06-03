@@ -1,31 +1,174 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model ValuationsConsumer.Models.AccountDetails
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<ul>
+    <li><b>Client Details</b></li>
+    <li>Reyker Client Id - @Model.ReykerClientId</li>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <li>External Client Id - @Model.ExternalClientId</li>
+
+    <li>Valuation Date - @Model.ExternalClientId</li>
+
+    @foreach (var accountPlan in Model.AccountPlans)
+    {
+        <ul>
+            <li><b>Client Plan Details</b></li>
+            <li>
+                TotalPortfolioValue - @accountPlan.TotalPortfolioValue
+            </li>
+            <li>
+                StockValue - @accountPlan.StockValue
+            </li>
+            <li>
+                CashAvailable - @accountPlan.CashAvailable
+            </li>
+            <li>
+                AccessNumber - @accountPlan.AccessNumber
+            </li>
+            <li>
+                PlanType - @accountPlan.AccessNumber
+            </li>
+            <li>
+                Ifa - @accountPlan.Ifa
+            </li>
+            <li>
+                PlanName - @accountPlan.PlanName
+            </li>
+            <li>
+                Provider - @accountPlan.Provider
+            </li>
+            <li>
+                ProviderId - @accountPlan.ProviderId
+            </li>
+            <li>
+                CurrentYearIsaSubscription - @accountPlan.CurrentYearIsaSubscription
+            </li>
+
+            <li><b>Portfolio Valuations</b></li>
+            @foreach (var portfolioValuation in accountPlan.PortfolioValuations)
+            {
+                <ul>
+                    <li>
+                        <b>@portfolioValuation.Name</b>
+                    </li>
+                    <li>
+                        Quantity - @portfolioValuation.Quantity
+                    </li>
+                    <li>
+                        Value - @portfolioValuation.Value
+                    </li>
+                    <li>
+                        BookCost - @portfolioValuation.BookCost
+                    </li>
+                    <li>
+                        Price - @portfolioValuation.Price
+                    </li>
+                    <li>
+                        PriceDate - @portfolioValuation.PriceDate
+                    </li>
+                    <li>Isin - @portfolioValuation.Isin</li>
+                </ul>
+            }
+
+            <li><b>Net Investment Income Details</b></li>
+            @if (accountPlan.NetInvestmentIncomeDetails.Count > 0)
+            {
+                foreach (var planNetInvestmentIncome in accountPlan.NetInvestmentIncomeDetails)
+                {
+                    <ul>
+                        <li>
+                            <b>@planNetInvestmentIncome.Name</b>
+                        </li>
+                        <li>
+                            TransactionId - @planNetInvestmentIncome.TransactionId
+                        </li>
+                        <li>
+                            TransactionDate - @planNetInvestmentIncome.TransactionDate
+                        </li>
+                        <li>
+                            Value - @planNetInvestmentIncome.Value
+                        </li>
+                        <li>
+                            Type - @planNetInvestmentIncome.Type
+                        </li>
+                        <li>
+                            Isin - @planNetInvestmentIncome.Isin
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul>
+                    <li>
+                        No records
+                    </li>
+                </ul>
+            }
+
+            <li><b>Investment Transaction Details</b></li>
+            @if (accountPlan.InvestmentTransactionDetails.Count > 0)
+            {
+                foreach (var investmentTransactionDetails in accountPlan.InvestmentTransactionDetails)
+                {
+                    <ul>
+                        <li>
+                            <b>@investmentTransactionDetails.Name</b>
+                        </li>
+                        <li>
+                            TransactionId - @investmentTransactionDetails.TransactionId
+                        </li>
+                        <li>
+                            TransactionDate - @investmentTransactionDetails.TransactionDate
+                        </li>
+                        <li>
+                            Quantity - @investmentTransactionDetails.Quantity
+                        </li>
+                        <li>
+                            Isin - @investmentTransactionDetails.Isin
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul>
+                    <li>
+                        No records
+                    </li>
+                </ul>
+            }
+
+            <li><b>Cash Transaction Details</b></li>
+            @if (accountPlan.CashTransactionDetails.Count > 0)
+            {
+                foreach (var cashTransactionDetails in accountPlan.CashTransactionDetails)
+                {
+                    <ul>
+                        <li>
+                            <b>@cashTransactionDetails.TransactionDate</b>
+                        </li>
+                        <li>
+                            TransactionId - @cashTransactionDetails.TransactionId
+                        </li>
+                        <li>
+                            Type - @cashTransactionDetails.TransactionType
+                        </li>
+                        <li>
+                            Amount - @cashTransactionDetails.Amount
+                        </li>
+                        <li>
+                            Isin - @cashTransactionDetails.Isin
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul>
+                    <li>
+                        No records
+                    </li>
+                </ul>
+            }
+        </ul>
+    }
