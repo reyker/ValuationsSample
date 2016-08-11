@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -11,19 +14,21 @@ namespace ValuationsConsumer.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var ad = await GetClientValuationDetails();
-            return View(ad);
+            return View();
         }
 
-        public async Task<AccountDetails> GetClientValuationDetails()
+        [HttpPost]
+        public async Task<ActionResult> GetClientValuationDetails(ClientDetailsId clientDetailsId)
         {
             var model = new AccountDetails();
 
             using (new HttpClient())
             {
-                var request = WebRequest.CreateHttp("https://reykervaluationsexternaltest.azurewebsites.net/api/plans/3699");
+                var url = ConfigurationManager.AppSettings["APIUrl"];
+
+                var request = WebRequest.CreateHttp(url + "api/plans/" + clientDetailsId.ReykerClientId);
                 request.ContentType = "text/json";
                 request.Method = "GET";
 
@@ -31,20 +36,29 @@ namespace ValuationsConsumer.Controllers
                 const string authHeader = "Reyker USERNAME";
                 request.Headers.Add("Authorization", authHeader);
 
-                using (var response = request.GetResponse() as HttpWebResponse)
+                try
                 {
-                    if (response != null && response.StatusCode == HttpStatusCode.OK)
+
+                    using (var response = request.GetResponse() as HttpWebResponse)
                     {
-                        using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                        if (response != null && response.StatusCode == HttpStatusCode.OK)
                         {
-                            var objText = reader.ReadToEnd();
-                            model = await objText.AES_Decrypt<AccountDetails>();
+                            using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                            {
+                                var objText = reader.ReadToEnd();
+                                model = await objText.AES_Decrypt<AccountDetails>();
+                            }
                         }
                     }
+
+                }
+                catch (Exception ex)
+                {
+                    var x = ex.Message;
                 }
             }
 
-            return model;
-        } 
+            return View("ClientValuationResult",model);
+        }
     }
 }

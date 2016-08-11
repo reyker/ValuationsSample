@@ -1,174 +1,18 @@
-﻿@model ValuationsConsumer.Models.AccountDetails
+﻿@model ValuationsConsumer.Models.ClientDetailsId
 
-<ul>
-    <li><b>Client Details</b></li>
-    <li>Reyker Client Id - @Model.ReykerClientId</li>
+<h2>Get Client Details</h2>
 
-    <li>External Client Id - @Model.ExternalClientId</li>
+@using (Html.BeginForm("GetClientValuationDetails", "Home", FormMethod.Post))
+{
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ReykerClientId)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.ReykerClientId)
+    </div>
 
-    <li>Valuation Date - @Model.ExternalClientId</li>
-
-    @foreach (var accountPlan in Model.AccountPlans)
-    {
-        <ul>
-            <li><b>Client Plan Details</b></li>
-            <li>
-                TotalPortfolioValue - @accountPlan.TotalPortfolioValue
-            </li>
-            <li>
-                StockValue - @accountPlan.StockValue
-            </li>
-            <li>
-                CashAvailable - @accountPlan.CashAvailable
-            </li>
-            <li>
-                AccessNumber - @accountPlan.AccessNumber
-            </li>
-            <li>
-                PlanType - @accountPlan.AccessNumber
-            </li>
-            <li>
-                Ifa - @accountPlan.Ifa
-            </li>
-            <li>
-                PlanName - @accountPlan.PlanName
-            </li>
-            <li>
-                Provider - @accountPlan.Provider
-            </li>
-            <li>
-                ProviderId - @accountPlan.ProviderId
-            </li>
-            <li>
-                CurrentYearIsaSubscription - @accountPlan.CurrentYearIsaSubscription
-            </li>
-
-            <li><b>Portfolio Valuations</b></li>
-            @foreach (var portfolioValuation in accountPlan.PortfolioValuations)
-            {
-                <ul>
-                    <li>
-                        <b>@portfolioValuation.Name</b>
-                    </li>
-                    <li>
-                        Quantity - @portfolioValuation.Quantity
-                    </li>
-                    <li>
-                        Value - @portfolioValuation.Value
-                    </li>
-                    <li>
-                        BookCost - @portfolioValuation.BookCost
-                    </li>
-                    <li>
-                        Price - @portfolioValuation.Price
-                    </li>
-                    <li>
-                        PriceDate - @portfolioValuation.PriceDate
-                    </li>
-                    <li>Isin - @portfolioValuation.Isin</li>
-                </ul>
-            }
-
-            <li><b>Net Investment Income Details</b></li>
-            @if (accountPlan.NetInvestmentIncomeDetails.Count > 0)
-            {
-                foreach (var planNetInvestmentIncome in accountPlan.NetInvestmentIncomeDetails)
-                {
-                    <ul>
-                        <li>
-                            <b>@planNetInvestmentIncome.Name</b>
-                        </li>
-                        <li>
-                            TransactionId - @planNetInvestmentIncome.TransactionId
-                        </li>
-                        <li>
-                            TransactionDate - @planNetInvestmentIncome.TransactionDate
-                        </li>
-                        <li>
-                            Value - @planNetInvestmentIncome.Value
-                        </li>
-                        <li>
-                            Type - @planNetInvestmentIncome.Type
-                        </li>
-                        <li>
-                            Isin - @planNetInvestmentIncome.Isin
-                        </li>
-                    </ul>
-                }
-            }
-            else
-            {
-                <ul>
-                    <li>
-                        No records
-                    </li>
-                </ul>
-            }
-
-            <li><b>Investment Transaction Details</b></li>
-            @if (accountPlan.InvestmentTransactionDetails.Count > 0)
-            {
-                foreach (var investmentTransactionDetails in accountPlan.InvestmentTransactionDetails)
-                {
-                    <ul>
-                        <li>
-                            <b>@investmentTransactionDetails.Name</b>
-                        </li>
-                        <li>
-                            TransactionId - @investmentTransactionDetails.TransactionId
-                        </li>
-                        <li>
-                            TransactionDate - @investmentTransactionDetails.TransactionDate
-                        </li>
-                        <li>
-                            Quantity - @investmentTransactionDetails.Quantity
-                        </li>
-                        <li>
-                            Isin - @investmentTransactionDetails.Isin
-                        </li>
-                    </ul>
-                }
-            }
-            else
-            {
-                <ul>
-                    <li>
-                        No records
-                    </li>
-                </ul>
-            }
-
-            <li><b>Cash Transaction Details</b></li>
-            @if (accountPlan.CashTransactionDetails.Count > 0)
-            {
-                foreach (var cashTransactionDetails in accountPlan.CashTransactionDetails)
-                {
-                    <ul>
-                        <li>
-                            <b>@cashTransactionDetails.TransactionDate</b>
-                        </li>
-                        <li>
-                            TransactionId - @cashTransactionDetails.TransactionId
-                        </li>
-                        <li>
-                            Type - @cashTransactionDetails.TransactionType
-                        </li>
-                        <li>
-                            Amount - @cashTransactionDetails.Amount
-                        </li>
-                        <li>
-                            Isin - @cashTransactionDetails.Isin
-                        </li>
-                    </ul>
-                }
-            }
-            else
-            {
-                <ul>
-                    <li>
-                        No records
-                    </li>
-                </ul>
-            }
-        </ul>
-    }
+    <br>
+    <div class="editor-field">
+        <input type="submit" class="btn btn-success">
+    </div>
+}
