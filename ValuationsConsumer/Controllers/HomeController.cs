@@ -49,13 +49,21 @@ namespace ValuationsConsumer.Controllers
                                 model = await objText.AES_Decrypt<AccountDetails>();
                             }
                         }
+                        ViewData["ResponseStatusCode"] = response.StatusCode;
+                        ViewData["ResponseStatusMessage"] = response.StatusDescription;
                     }
 
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
-                    var x = ex.Message;
+                    var response = ex.Response as HttpWebResponse;
+                    ViewData["ResponseStatusCode"] = response.StatusCode;
+                    ViewData["ResponseStatusMessage"] = response.StatusDescription;
+
+                    model.AccountPlans = new List<AccountPlanDetails>();
                 }
+
+              
             }
 
             return View("ClientValuationResult",model);
