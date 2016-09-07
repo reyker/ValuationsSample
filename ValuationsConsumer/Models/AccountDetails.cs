@@ -59,6 +59,9 @@ namespace ValuationsConsumer.Models
         public string Name { get; set; }
         public string Isin { get; set; }
         public double Quantity { get; set; }
+        public string ExternalTradeId { get; set; }
+        public string MatchedBargainRef { get; set; }
+
     }
 
     public class PlanCashTransaction
@@ -68,5 +71,7 @@ namespace ValuationsConsumer.Models
         public string TransactionType { get; set; }
         public double Amount { get; set; }
         public string Isin { get; set; }
+        public string ExternalTradeId { get; set; }
+        public string MatchedBargainRef { get; set; }
     }
 }
