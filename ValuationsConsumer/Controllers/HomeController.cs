@@ -33,7 +33,7 @@ namespace ValuationsConsumer.Controllers
                 request.Method = "GET";
 
                 //Need to change username to provided username
-                const string authHeader = "Reyker ReykerInternalTestAccount";
+                const string authHeader = "Reyker USERNAME";
                 request.Headers.Add("Authorization", authHeader);
 
                 try
